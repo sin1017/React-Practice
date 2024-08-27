@@ -1,0 +1,2 @@
+npm pkg set scripts.commitlint="commitlint --edit"
+echo "npm run commitlint \${1}" > .husky/commit-msg
