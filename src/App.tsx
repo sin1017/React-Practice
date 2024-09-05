@@ -55,7 +55,7 @@ function App() {
 			<Counter />
 			<div>
 				<p>
-					倒數計時：<span>{remainingSeconds}</span>
+					遊戲進行時間：<span>{remainingSeconds}</span>
 				</p>
 			</div>
 		</>
