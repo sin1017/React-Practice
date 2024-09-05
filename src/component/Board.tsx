@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Square from './Square';
 
 export type BoardType = (string | null)[];
@@ -5,19 +6,20 @@ type BoardProps = {
 	isNext: boolean;
 	boards: BoardType;
 	onPlay: (value: BoardType) => void;
+	onGameOver: (value: boolean) => void;
 };
 
-export default function Board({ boards, isNext, onPlay }: BoardProps) {
+export default function Board({ boards, isNext, onPlay, onGameOver }: BoardProps) {
 	const winner = checkWinner(boards);
 	const status = winner ? `${winner} 獲勝` : `下一個是 ${isNext ? 'X' : 'O'}`;
-	console.log(isNext);
 
 	function handelClick(index: number) {
-		if (boards[index] || checkWinner(boards)) return;
+		if (boards[index] || winner) return;
 
 		const newBoards = boards.slice();
 		newBoards[index] = isNext ? 'X' : 'O';
 		onPlay(newBoards);
+
 	}
 
 	function checkWinner(board: BoardType) {
@@ -41,7 +43,11 @@ export default function Board({ boards, isNext, onPlay }: BoardProps) {
 
 		return null;
 	}
-
+	useEffect(() => {
+		if (winner) {
+			onGameOver(false)
+		}
+	}, [winner])
 	return (
 		<>
 			<div className="status">{status}</div>
