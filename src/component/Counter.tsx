@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { increment, decrement } from '../features/counter/ageSlice';
 
 export function Counter() {
-	const count = useSelector((state) => state.age.value);
+	const count = useSelector((state: { age: { value: number } }) => state.age.value);
 	const dispatch = useDispatch();
 
 	return (
